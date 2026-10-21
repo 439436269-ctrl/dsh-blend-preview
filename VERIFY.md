@@ -1,4 +1,4 @@
-﻿# Verification record — dsh-blend-preview 0.1.0
+# Verification record — dsh-blend-preview 0.1.0
 
 Date: 2026-10-20. Machine: Windows 11, DeepSeek Harness Desktop **0.2.1-rc.2**
 (`<DSH install>`), **Blender 5.2.2 LTS**
@@ -134,3 +134,26 @@ already excludes that version from the release-age gate).
 | Preview shows 「这个浏览器/显卡组合不支持 WebGL」 while the canvas is 300×150 | the viewer was created in a mount effect that ran while the component still rendered the “loading” branch (no canvas); it never retried when the canvas appeared | create the viewer from the canvas `ref` callback, dispose on `null`; the model fetch then finds a live viewer |
 | Wireframe toggle changes the button state but not the picture | the LINES pass drew with the triangle index buffer bound instead of the generated edge buffer | bind `primitive.lineIndices` for the edge pass; edges replace the surface (a 68k-edge overlay on top of the solid turned to mush) |
 | Blender reports success but no GLB appears | the glTF exporter rewrites the filepath to end in `.glb`, so `model.glb.part` became `model.glb.part.glb` | write `model.part.glb` and rename to `model.glb` |
+
+## Release — 0.1.0 (2026-10-21)
+
+| Item | Value |
+|---|---|
+| GitHub | https://github.com/439436269-ctrl/dsh-blend-preview (public, topics `dsh-plugin` + `blender`/`gltf`/`preview`/`3d`) |
+| Branch / tag | `main` at `71bb02e` (API-pushed; local `HEAD` is content-equivalent), tag `v0.1.0` → `71bb02e` |
+| CI | `ci` workflow **success** on `71bb02e` (Node 22 + 24) |
+| npm | `dsh-blend-preview@0.1.0`, `dist-tags.latest = 0.1.0` |
+| Published | 2026-10-21T02:40:51.801Z |
+| shasum / integrity | `4efc8df3aeb3fd1cf72dba88eb4a250d75a0d870` / `sha512-8BnUHbg/PFoX6v8uMAxTl+75US3Rs7KmZItBhpAF4GufiJPUOMD4znP9bnyZOBXMIGtle/GN58cK0XBbgwduUQ==` |
+| Tarball | 14 files, 137,744 B unpacked |
+| Install | `dsh plugin --profile <profile> add dsh-blend-preview@0.1.0` |
+
+Artifact read-back:
+
+- `GET /-/package/dsh-blend-preview/dist-tags` → `{"latest":"0.1.0"}`; both `GET /dsh-blend-preview/0.1.0` and `/latest` → 200.
+- Downloaded tarball sha1 == `dist.shasum`; sha512 integrity verified.
+- 13 of 14 files byte-identical to the source tree; the remaining `package.json` differs only in bytes (npm repacks it) while its parsed JSON is semantically equal. `lib/client.js` sha256 `19BDAC036C53637FA857EA638651FD5F82FBB8F5F9B83A787D63D012638A3F6C` matches the built file.
+- Desktop profile dependency switched from the local tarball to `dsh-blend-preview@0.1.0` (explicit version bypasses the 24 h release-age gate; pnpm recorded it in `minimumReleaseAgeExclude`). The installed `lib/client.js` hash still matches the build.
+
+Push note: `github.com:443` reset connections from this network (35 s timeout on `git ls-remote`), so the empty repository was seeded through the Contents API and the tree was pushed with the Git Data API. The server tree equals local `HEAD^{tree}` (`4a1b0c6`); the server commit SHA differs by design (different committer/time), so `git status` shows the local branch ahead until `git fetch` works again.
+
