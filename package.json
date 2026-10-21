@@ -1,0 +1,79 @@
+{
+  "name": "dsh-blend-preview",
+  "version": "0.1.0",
+  "description": "Preview Blender .blend files inside DeepSeek Harness: the Host half exports a cached GLB with Blender headless and the right-Sidebar document preview draws it in an interactive WebGL viewport with scene statistics.",
+  "type": "module",
+  "license": "MIT",
+  "author": "439436269-ctrl",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "blender",
+    "blend",
+    "gltf",
+    "glb",
+    "preview",
+    "3d"
+  ],
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/**/*.js",
+    "lib/**/*.py",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "CHANGELOG.md",
+    "VERIFY.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+        "@deepseek-ai/dsh-client-ui-sidebar-right",
+        "@deepseek-ai/dsh-api-workspace-files",
+        "@deepseek-ai/dsh-client-resources"
+      ]
+    },
+    "compatibility": {
+      "dshReleases": {
+        "0.2.0-rc.2": "compatible",
+        "0.2.1-rc.2": "compatible"
+      }
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/439436269-ctrl/dsh-blend-preview.git"
+  },
+  "homepage": "https://github.com/439436269-ctrl/dsh-blend-preview#readme",
+  "bugs": {
+    "url": "https://github.com/439436269-ctrl/dsh-blend-preview/issues"
+  },
+  "scripts": {
+    "build": "node scripts/build-client.mjs",
+    "test": "node --test test/*.test.js",
+    "selftest": "node scripts/live-selftest.mjs",
+    "e2e": "node scripts/e2e-browser.mjs"
+  }
+}

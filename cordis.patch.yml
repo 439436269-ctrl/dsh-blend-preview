@@ -1,0 +1,31 @@
+# dsh-blend-preview bundle patch: one plugin row.
+#
+# A patch replaces the targeted row's whole `config`, so a profile that wants to
+# override one key must restate the others it cares about. Every key below also
+# has a code-side default in lib/config.js, so this file stays valid even when a
+# patch-side helper is unavailable.
+#
+# `routePath` must stay under /api: the connection service authenticates every
+# /api request (Host/Origin fence + browser session cookie) before the route
+# runs, which is what keeps an arbitrary local file from being readable by a
+# cross-site page.
+
+- insert:
+    - id: blend-preview
+      name: dsh-blend-preview
+      config:
+        enabled: true
+        routePath: /api/blend-preview
+        extensions:
+          - blend
+        # Empty means "detect": DSH_BLENDER / BLENDER_PATH, then PATH, then the
+        # usual Steam and Blender Foundation install locations.
+        blenderPath: ""
+        # Empty means ~/.dsh/cache/blend-preview.
+        cacheDir: ""
+        # A cold conversion runs one Blender process; a 300 MB scene takes
+        # tens of seconds, so the ceiling is generous.
+        timeoutMs: 180000
+        maxBytes: 1073741824
+        applyModifiers: true
+        cacheEntries: 24
