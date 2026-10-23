@@ -1,3 +1,5 @@
+> **Renamed:** the canonical package is now [`dsh-preview-blender`](https://github.com/439436269-ctrl/dsh-preview-blender). This repository is kept as the legacy 0.1.x home.
+
 ﻿# dsh-blend-preview
 
 Preview Blender **`.blend`** files inside [DeepSeek Harness](https://github.com/deepseek-ai): the right-Sidebar document preview turns the scene into an interactive 3D viewport (orbit / zoom / wireframe) with a scene-information panel, instead of the built-in “binary file, no preview” empty state.
